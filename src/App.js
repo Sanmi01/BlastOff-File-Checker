@@ -2,12 +2,29 @@ import React, {useState} from 'react';
 import './App.css';
 import * as XLSX from 'xlsx';
 import Dropzone from 'react-dropzone';
+import ErrorTable from './ErrorTable';
 
 
 
 function App() {
-  const filesWithErrors = [];
+  
+  const [show, setShow] = useState(false);
   const [renderedFiles, setRenderedFiles] = useState([]);
+
+  const randomFunction = (files) => {
+    const filesWithErrors = [];
+    files.forEach((item, index) => {
+      readExcel(item, filesWithErrors)
+    })
+
+    console.log(filesWithErrors)
+    setRenderedFiles(filesWithErrors)
+    setShow(false)
+  }
+
+  const abcFunction = () => {
+    setShow(true)
+  }
 
   const baseStyle = {
     flex: 1,
@@ -31,8 +48,9 @@ function App() {
     let answers = []
     data.forEach((item, index) => {
       if((item.Answer === item.A) || (item.Answer === item.B) ||(item.Answer === item.C) ||(item.Answer === item.D)) {
+
       } else {
-        answers.push({...item, Error: "Answer is not among Options"})
+        answers.push({...item, ErrorMessage: "Answer is not among Options"})
         // console.log("Answer does not match Option")
         // console.log(item)
       }
@@ -45,7 +63,7 @@ function App() {
     let duplicates = []
     data.forEach((item, index) => {
       if((item.A === item.B) || (item.A === item.C) || (item.A === item.D) || (item.B === item.C) || (item.B === item.D) || (item.C === item.D)) {
-        duplicates.push({...item, Error: "Duplicate Options"})
+        duplicates.push({...item, ErrorMessage: "Duplicate Options"})
         // console.log("Duplicate Options")
         // console.log(item)
       }
@@ -54,7 +72,7 @@ function App() {
     fileWithError.duplicateErrors = duplicates 
   }
 
-  const readExcel = (file) => {
+  const readExcel = (file, filesWithErrors) => {
     
     let fileWithError = {};
     fileWithError.name = file.name
@@ -97,22 +115,10 @@ function App() {
     
   }
 
+
   return (
     <div className="App">
-      <div>
-        <input type="file" onInput={(e) => {
-          const file = e.target.files[0]
-          readExcel(file);
-        }} />
-      </div>
-      <Dropzone onDrop={(acceptedFiles) => {
-      acceptedFiles.forEach((item, index) => {
-      readExcel(item)
-      
-    })
-    setRenderedFiles(filesWithErrors)
-    console.log(filesWithErrors)
-    }}
+      <Dropzone onDrop={(acceptedFiles) => randomFunction(acceptedFiles)}
       >
   {({getRootProps, getInputProps}) => (
     <section>
@@ -123,6 +129,15 @@ function App() {
     </section>
   )}
 </Dropzone>
+
+  {show && renderedFiles.length > 0 &&
+      renderedFiles.map((item, index) => (
+        <ErrorTable key={index} fileWithError={item} />
+      ))
+    }
+
+    {show && renderedFiles.length === 0 && <p>No error in the files</p>}
+    <button onClick={abcFunction}>Display Errors</button>
     </div>
   );
 }
