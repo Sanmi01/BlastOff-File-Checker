@@ -126,7 +126,7 @@ function App() {
   const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
     randomFunction(acceptedFiles)
-  }, [])
+  }, [randomFunction])
   const {acceptedFiles, getRootProps, getInputProps, isFocused, isDragActive, isDragAccept, isDragReject } = useDropzone({onDrop})
 
   const files = acceptedFiles.map(file => (
@@ -143,7 +143,11 @@ function App() {
   }), [
     isFocused,
     isDragAccept,
-    isDragReject
+    isDragReject,
+    acceptStyle,
+    baseStyle,
+    focusedStyle,
+    rejectStyle
   ]);
   
 
