@@ -8,13 +8,14 @@ import ErrorTable from './ErrorTable';
 
 
 function App() {
-  
   const [show, setShow] = useState(false);
   const [renderedFiles, setRenderedFiles] = useState([]);
+  const [numberOfErrors, setNumberOfErrors] = useState(0);
 
   
 
   const randomFunction = (files) => {
+    
     const filesWithErrors = [];
     files.forEach((item, index) => {
       readExcel(item, filesWithErrors)
@@ -22,6 +23,7 @@ function App() {
 
     setRenderedFiles(filesWithErrors)
     setShow(false)
+    
   }
 
   const showErrorsFunctions = () => {
@@ -80,7 +82,7 @@ function App() {
     fileWithError.duplicateErrors = duplicates 
   }
 
-  const readExcel = (file, filesWithErrors) => {
+  const readExcel = (file, filesWithErrors, errors) => {
     
     let fileWithError = {};
     fileWithError.name = file.name
@@ -115,6 +117,9 @@ function App() {
       if(fileWithError.answerErrors.length === 0 && fileWithError.duplicateErrors.length === 0) {
 
       } else {
+        setNumberOfErrors((prevState) => {
+          return prevState + fileWithError.answerErrors.length +fileWithError.duplicateErrors.length
+        })
         filesWithErrors.push(fileWithError)
       }
       
@@ -170,14 +175,15 @@ function App() {
         <ul>{files}</ul>
       </aside>
 
-
+      {show && <p>No error in the files = {numberOfErrors}</p>}
   {show && renderedFiles.length > 0 &&
       renderedFiles.map((item, index) => (
         <ErrorTable key={index} fileWithError={item} />
       ))
     }
 
-    {show && renderedFiles.length === 0 && <p>No error in the files</p>}
+    {show && renderedFiles.length === 0 && <p>Number of errors in the files</p>}
+
     <button type="button" className="btn btn-dark m-3" onClick={showErrorsFunctions}>Display Errors</button>
     </Container>
   );
