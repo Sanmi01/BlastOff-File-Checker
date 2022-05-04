@@ -1,6 +1,6 @@
 const ErrorTable = ({ fileWithError }) => {
   return (
-    <div className="errorTable p-3 m-3">
+    <div className="errorTable p-2 m-1">
       <h3>{fileWithError.name}</h3>
       {fileWithError.duplicateErrors.length > 0 && <><h4>Duplicate Error Table</h4>
       <table className="table table-striped table-dark">

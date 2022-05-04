@@ -1,6 +1,7 @@
 import React, {useState, useCallback, useMemo} from 'react';
 import './App.css';
 import * as XLSX from 'xlsx';
+import { Container } from 'react-bootstrap';
 import {useDropzone} from 'react-dropzone';
 import ErrorTable from './ErrorTable';
 
@@ -37,8 +38,8 @@ function App() {
     borderRadius: 2,
     borderColor: '#eeeeee',
     borderStyle: 'dashed',
-    backgroundColor: '#fafafa',
-    color: '#bdbdbd',
+    backgroundColor: '#add8e6',
+    color: '#000000',
     outline: 'none',
     transition: 'border .24s ease-in-out'
   };
@@ -147,7 +148,7 @@ function App() {
   
 
   return (
-    <div className="App">
+    <Container className="App">
   <>
   <div {...getRootProps({style})}>
       <input {...getInputProps()} />
@@ -172,8 +173,8 @@ function App() {
     }
 
     {show && renderedFiles.length === 0 && <p>No error in the files</p>}
-    <button type="button" class="btn btn-dark m-3" onClick={showErrorsFunctions}>Display Errors</button>
-    </div>
+    <button type="button" className="btn btn-dark m-3" onClick={showErrorsFunctions}>Display Errors</button>
+    </Container>
   );
 }
 
