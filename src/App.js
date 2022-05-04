@@ -74,7 +74,6 @@ function App() {
   const checkDuplicateOptions = (data, fileWithError) => {
     let duplicates = []
     data.forEach((item, index) => {
-      console.log(item)
       if((item.A === item.B) || (item.A === item.C) || (item.A === item.D) || (item.B === item.C) || (item.B === item.D) || (item.C === item.D)) {
         duplicates.push({...item, ErrorMessage: "Duplicate Options"})
       }
