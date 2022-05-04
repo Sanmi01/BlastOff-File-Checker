@@ -150,6 +150,7 @@ function App() {
   return (
     <Container className="App">
   <>
+  <h1>Excel File Checker</h1>
   <div {...getRootProps({style})}>
       <input {...getInputProps()} />
       {
