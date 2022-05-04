@@ -23,7 +23,7 @@ function App() {
     setShow(false)
   }
 
-  const abcFunction = () => {
+  const showErrorsFunctions = () => {
     setShow(true)
   }
 
@@ -172,7 +172,7 @@ function App() {
     }
 
     {show && renderedFiles.length === 0 && <p>No error in the files</p>}
-    <button className="m-3" onClick={abcFunction}>Display Errors</button>
+    <button type="button" class="btn btn-dark m-3" onClick={showErrorsFunctions}>Display Errors</button>
     </div>
   );
 }
