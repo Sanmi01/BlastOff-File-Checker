@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
 import './App.css';
 import * as XLSX from 'xlsx';
-import Dropzone from 'react-dropzone';
+import {useDropzone} from 'react-dropzone';
 import ErrorTable from './ErrorTable';
 
 
@@ -11,13 +11,14 @@ function App() {
   const [show, setShow] = useState(false);
   const [renderedFiles, setRenderedFiles] = useState([]);
 
+  
+
   const randomFunction = (files) => {
     const filesWithErrors = [];
     files.forEach((item, index) => {
       readExcel(item, filesWithErrors)
     })
 
-    console.log(filesWithErrors)
     setRenderedFiles(filesWithErrors)
     setShow(false)
   }
@@ -41,8 +42,18 @@ function App() {
     outline: 'none',
     transition: 'border .24s ease-in-out'
   };
-
-  const [style] = useState(baseStyle)
+  
+  const focusedStyle = {
+    borderColor: '#2196f3'
+  };
+  
+  const acceptStyle = {
+    borderColor: '#00e676'
+  };
+  
+  const rejectStyle = {
+    borderColor: '#ff1744'
+  };
 
   const checkAnswer = (data, fileWithError) => {
     let answers = []
@@ -51,8 +62,6 @@ function App() {
 
       } else {
         answers.push({...item, ErrorMessage: "Answer is not among Options"})
-        // console.log("Answer does not match Option")
-        // console.log(item)
       }
     });
 
@@ -64,8 +73,6 @@ function App() {
     data.forEach((item, index) => {
       if((item.A === item.B) || (item.A === item.C) || (item.A === item.D) || (item.B === item.C) || (item.B === item.D) || (item.C === item.D)) {
         duplicates.push({...item, ErrorMessage: "Duplicate Options"})
-        // console.log("Duplicate Options")
-        // console.log(item)
       }
     })
 
@@ -102,7 +109,6 @@ function App() {
     });
 
     promise.then((data) => {
-      // console.log(data)
       checkAnswer(data, fileWithError)
       checkDuplicateOptions(data, fileWithError)
       if(fileWithError.answerErrors.length === 0 && fileWithError.duplicateErrors.length === 0) {
@@ -116,19 +122,48 @@ function App() {
   }
 
 
+  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
+    randomFunction(acceptedFiles)
+  }, [])
+  const {acceptedFiles, getRootProps, getInputProps, isFocused, isDragActive, isDragAccept, isDragReject } = useDropzone({onDrop})
+
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  const style = useMemo(() => ({
+    ...baseStyle,
+    ...(isFocused ? focusedStyle : {}),
+    ...(isDragAccept ? acceptStyle : {}),
+    ...(isDragReject ? rejectStyle : {})
+  }), [
+    isFocused,
+    isDragAccept,
+    isDragReject
+  ]);
+  
+
   return (
     <div className="App">
-      <Dropzone onDrop={(acceptedFiles) => randomFunction(acceptedFiles)}
-      >
-  {({getRootProps, getInputProps}) => (
-    <section>
-      <div {...getRootProps({style})}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
-    </section>
-  )}
-</Dropzone>
+  <>
+  <div {...getRootProps({style})}>
+      <input {...getInputProps()} />
+      {
+        isDragActive ?
+          <p>Drop the files here ...</p> :
+          <p>Drag 'n' drop some files here, or click to select files</p>
+      }
+    </div>
+  </>
+
+  <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+
 
   {show && renderedFiles.length > 0 &&
       renderedFiles.map((item, index) => (
@@ -137,7 +172,7 @@ function App() {
     }
 
     {show && renderedFiles.length === 0 && <p>No error in the files</p>}
-    <button onClick={abcFunction}>Display Errors</button>
+    <button className="m-3" onClick={abcFunction}>Display Errors</button>
     </div>
   );
 }
