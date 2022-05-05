@@ -6,6 +6,7 @@ const ErrorTable = ({ fileWithError }) => {
       <table className="table table-striped table-dark">
         <thead>
           <tr>
+            <th scope="col">Row Number</th>
             <th scope="col">Question</th>
             <th scope="col">Category</th>
             <th scope="col">A</th>
@@ -21,6 +22,7 @@ const ErrorTable = ({ fileWithError }) => {
           {fileWithError.duplicateErrors.map((item, index) => (
             <tr key={index}>
               {/* <th scope="row">1</th> */}
+              <td>{item.Row + 2}</td>
               <td>{item.Question}</td>
               <td>{item.Category}</td>
               <td>{item.A}</td>
@@ -41,6 +43,7 @@ const ErrorTable = ({ fileWithError }) => {
       <table className="table table-striped table-dark">
         <thead>
           <tr>
+            <th scope="col">Row Number</th>
             <th scope="col">Question</th>
             <th scope="col">Category</th>
             <th scope="col">A</th>
@@ -56,6 +59,7 @@ const ErrorTable = ({ fileWithError }) => {
           {fileWithError.answerErrors.map((item, index) => (
             <tr key={index}>
               {/* <th scope="row">1</th> */}
+              <td>{item.Row + 2}</td>
               <td>{item.Question}</td>
               <td>{item.Category}</td>
               <td>{item.A}</td>

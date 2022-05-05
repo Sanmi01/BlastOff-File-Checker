@@ -64,7 +64,7 @@ function App() {
       if((item.Answer === item.A) || (item.Answer === item.B) ||(item.Answer === item.C) ||(item.Answer === item.D)) {
 
       } else {
-        answers.push({...item, ErrorMessage: "Answer is not among Options"})
+        answers.push({...item, ErrorMessage: "Answer is not among Options", Row: index})
       }
     });
 
@@ -75,7 +75,7 @@ function App() {
     let duplicates = []
     data.forEach((item, index) => {
       if((item.A === item.B) || (item.A === item.C) || (item.A === item.D) || (item.B === item.C) || (item.B === item.D) || (item.C === item.D)) {
-        duplicates.push({...item, ErrorMessage: "Duplicate Options"})
+        duplicates.push({...item, ErrorMessage: "Duplicate Options", Row: index})
       }
     })
 
@@ -83,7 +83,9 @@ function App() {
   }
 
   const readExcel = (file, filesWithErrors, errors) => {
-    
+
+
+    setNumberOfErrors(0)
     let fileWithError = {};
     fileWithError.name = file.name
 
@@ -112,6 +114,7 @@ function App() {
     });
 
     promise.then((data) => {
+      console.log(data)
       checkAnswer(data, fileWithError)
       checkDuplicateOptions(data, fileWithError)
       if(fileWithError.answerErrors.length === 0 && fileWithError.duplicateErrors.length === 0) {
@@ -175,7 +178,7 @@ function App() {
         <ul>{files}</ul>
       </aside>
 
-      {show && <p>No error in the files = {numberOfErrors}</p>}
+      {show && <p>Number of errors in the files = {numberOfErrors}</p>}
   {show && renderedFiles.length > 0 &&
       renderedFiles.map((item, index) => (
         <ErrorTable key={index} fileWithError={item} />
