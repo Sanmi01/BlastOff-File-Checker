@@ -15,7 +15,7 @@ function App() {
   
 
   const randomFunction = (files) => {
-    
+    setNumberOfErrors(0)
     const filesWithErrors = [];
     files.forEach((item, index) => {
       readExcel(item, filesWithErrors)
@@ -84,8 +84,6 @@ function App() {
 
   const readExcel = (file, filesWithErrors, errors) => {
 
-
-    setNumberOfErrors(0)
     let fileWithError = {};
     fileWithError.name = file.name
 
