@@ -8,6 +8,7 @@ const SpellingCheckerPage = () => {
     const [renderedFile, setRenderedFile] = useState([]);
 
     const randomFunction = (e) => {
+        setShow(false)
         const fileCheck = {}
         fileCheck.name = e.target.files[0].name
         readExcel(e.target.files[0], fileCheck)
