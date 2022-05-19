@@ -1,7 +1,6 @@
 import React from 'react'
 
 const SpellingTable = ({file}) => {
-    console.log(file)
     return (
         <div className="errorTable p-2 m-1">
       <h3>{file.name}</h3>

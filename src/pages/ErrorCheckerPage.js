@@ -15,7 +15,6 @@ const ErrorCheckerPage = () => {
   const randomFunction = (files) => {
     setNumberOfErrors(0)
     const filesWithErrors = [];
-    console.log(files)
     files.forEach((item, index) => {
       readExcel(item, filesWithErrors)
     })
@@ -111,7 +110,6 @@ const ErrorCheckerPage = () => {
     });
 
     promise.then((data) => {
-      console.log(data)
       checkAnswer(data, fileWithError)
       checkDuplicateOptions(data, fileWithError)
       if(fileWithError.answerErrors.length === 0 && fileWithError.duplicateErrors.length === 0) {

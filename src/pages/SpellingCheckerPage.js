@@ -11,7 +11,6 @@ const SpellingCheckerPage = () => {
         const fileCheck = {}
         fileCheck.name = e.target.files[0].name
         readExcel(e.target.files[0], fileCheck)
-        console.log(fileCheck)
         setRenderedFile(fileCheck)
     }
 
@@ -41,7 +40,6 @@ const SpellingCheckerPage = () => {
         });
     
         promise.then((data) => {
-          console.log(data)
           fileCheck.data = data
         })
         
