@@ -5,7 +5,7 @@ import SpellingTable from '../component/SpellingTable';
 
 const SpellingCheckerPage = () => {
     const [show, setShow] = useState(false);
-    const [renderedFile, setRenderedFile] = useState([]);
+    const [renderedFile, setRenderedFile] = useState({});
 
     const randomFunction = (e) => {
         setShow(false)
@@ -47,7 +47,11 @@ const SpellingCheckerPage = () => {
       }
 
       const showTable = () => {
-        setShow(true)
+        if(Object.keys(renderedFile).length === 0) {
+          
+        } else {
+          setShow(true)
+        }
       }
     return (
         <Container fluid>
