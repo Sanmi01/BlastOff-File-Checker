@@ -11,10 +11,10 @@ const SpellingTable = ({file}) => {
             <th scope="col">Row Number</th>
             <th scope="col">Question</th>
             <th scope="col">Category</th>
-            <th scope="col">A</th>
+            {/* <th scope="col">A</th>
             <th scope="col">B</th>
             <th scope="col">C</th>
-            <th scope="col">D</th>
+            <th scope="col">D</th> */}
             <th scope="col">Answer</th>
             <th scope="col">Hint</th>
           </tr>
@@ -25,10 +25,10 @@ const SpellingTable = ({file}) => {
               <td>{index + 1}</td>
               <td contentEditable='true' suppressContentEditableWarning={true} data-enable-grammarly="true">{item.Question}</td>
               <td>{item.Category}</td>
-              <td>{item.A}</td>
+              {/* <td>{item.A}</td>
               <td>{item.B}</td>
               <td>{item.C}</td>
-              <td>{item.D}</td>
+              <td>{item.D}</td> */}
               <td>{item.Answer}</td>
               <td contentEditable='true' suppressContentEditableWarning={true} data-enable-grammarly="true">{item.Hint}</td>
             </tr>
@@ -37,10 +37,10 @@ const SpellingTable = ({file}) => {
               <td>Ignore</td>
               <td contentEditable='true' suppressContentEditableWarning={true} data-enable-grammarly="true">In the Bible (Judges Chapter 7), who were the two Midianite princes taken prisoner by the tribe of Ephraim?</td>
               <td>Ignore</td>
+              {/* <td>Ignore</td>
               <td>Ignore</td>
               <td>Ignore</td>
-              <td>Ignore</td>
-              <td>Ignore</td>
+              <td>Ignore</td> */}
               <td>Ignore</td>
               <td contentEditable='true' suppressContentEditableWarning={true} data-enable-grammarly="true">In the Bible (Judges Chapter 7), who were the two Midianite princes taken prisoner by the tribe of Ephraim?</td>
             </tr>
