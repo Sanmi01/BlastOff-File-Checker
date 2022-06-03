@@ -22,7 +22,7 @@ const SpellingTable = ({file}) => {
         <tbody>
           {file.data.map((item, index) => (
             <tr key={index}>
-              <td>{index + 1}</td>
+              <td>{index + 2}</td>
               <td contentEditable='true' suppressContentEditableWarning={true} data-enable-grammarly="true">{item.Question}</td>
               <td>{item.Category}</td>
               {/* <td>{item.A}</td>
