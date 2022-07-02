@@ -80,6 +80,20 @@ const ErrorCheckerPage = () => {
     fileWithError.duplicateErrors = duplicates 
   }
 
+  const checkEmptyOptions = (data, fileWithError) => {
+    let emptyOptions = []
+
+    data.forEach((item, index) => {
+      if((item.A) && (item.B) && (item.C) && (item.D)) {
+        
+      } else {
+        emptyOptions.push({...item, ErrorMessage: "One of the options is empty or is 0. If 0, ignore.", Row: index})
+      }
+    })
+
+    fileWithError.emptyOptionsErrors = emptyOptions
+  }
+
   const readExcel = (file, filesWithErrors, errors) => {
 
     let fileWithError = {};
@@ -112,17 +126,18 @@ const ErrorCheckerPage = () => {
     promise.then((data) => {
       checkAnswer(data, fileWithError)
       checkDuplicateOptions(data, fileWithError)
-      if(fileWithError.answerErrors.length === 0 && fileWithError.duplicateErrors.length === 0) {
+      checkEmptyOptions(data, fileWithError)
+      if(fileWithError.answerErrors.length === 0 && fileWithError.duplicateErrors.length === 0 && fileWithError.emptyOptionsErrors.length === 0) {
 
       } else {
         setNumberOfErrors((prevState) => {
-          return prevState + fileWithError.answerErrors.length +fileWithError.duplicateErrors.length
+          return prevState + fileWithError.answerErrors.length +fileWithError.duplicateErrors.length + fileWithError.emptyOptionsErrors.length
         })
         filesWithErrors.push(fileWithError)
       }
       
     })
-    
+
   }
 
 
