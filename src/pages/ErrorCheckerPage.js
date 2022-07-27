@@ -59,7 +59,7 @@ const ErrorCheckerPage = () => {
   const checkAnswer = (data, fileWithError) => {
     let answers = []
     data.forEach((item, index) => {
-      if((item.Answer === item.A) || (item.Answer === item.B) ||(item.Answer === item.C) ||(item.Answer === item.D)) {
+      if((item.Answer === item.OptionA) || (item.Answer === item.OptionB) ||(item.Answer === item.OptionC) ||(item.Answer === item.OptionD)) {
 
       } else {
         answers.push({...item, ErrorMessage: "Answer is not among Options", Row: index})
@@ -72,7 +72,7 @@ const ErrorCheckerPage = () => {
   const checkDuplicateOptions = (data, fileWithError) => {
     let duplicates = []
     data.forEach((item, index) => {
-      if((item.A === item.B) || (item.A === item.C) || (item.A === item.D) || (item.B === item.C) || (item.B === item.D) || (item.C === item.D)) {
+      if((item.OptionA === item.OptionB) || (item.OptionA === item.OptionC) || (item.OptionA === item.OptionD) || (item.OptionB === item.OptionC) || (item.OptionB === item.OptionD) || (item.OptionC === item.OptionD)) {
         duplicates.push({...item, ErrorMessage: "Duplicate Options", Row: index})
       }
     })
@@ -84,7 +84,7 @@ const ErrorCheckerPage = () => {
     let emptyOptions = []
 
     data.forEach((item, index) => {
-      if((item.A) && (item.B) && (item.C) && (item.D)) {
+      if((item.OptionA) && (item.OptionB) && (item.OptionC) && (item.OptionD)) {
         
       } else {
         emptyOptions.push({...item, ErrorMessage: "One of the options is empty or is 0. If 0, ignore.", Row: index})
@@ -187,6 +187,8 @@ const ErrorCheckerPage = () => {
         <ul>{files}</ul>
       </aside>
 
+      
+
       {show && <p>Number of errors in the files = {numberOfErrors}</p>}
   {show && renderedFiles.length > 0 &&
       renderedFiles.map((item, index) => (
@@ -195,6 +197,27 @@ const ErrorCheckerPage = () => {
     }
 
     <button type="button" className="btn btn-dark m-3" onClick={showErrorsFunctions}>Display Errors</button>
+
+    {!show &&
+    <>
+    <p>File header should match the below</p>
+        <table className="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Row Number</th>
+            <th scope="col">Question</th>
+            <th scope="col">Category</th>
+            <th scope="col">OptionA</th>
+            <th scope="col">OptionB</th>
+            <th scope="col">OptionC</th>
+            <th scope="col">OptionD</th>
+            <th scope="col">Answer</th>
+            <th scope="col">Hint</th>
+          </tr>
+        </thead>
+      </table>
+      </>
+      }
     </Container>
     )
 }

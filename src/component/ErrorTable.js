@@ -25,10 +25,10 @@ const ErrorTable = ({ fileWithError }) => {
               <td>{item.Row + 2}</td>
               <td>{item.Question}</td>
               <td>{item.Category}</td>
-              <td>{item.A}</td>
-              <td>{item.B}</td>
-              <td>{item.C}</td>
-              <td>{item.D}</td>
+              <td>{item.OptionA}</td>
+              <td>{item.OptionB}</td>
+              <td>{item.OptionC}</td>
+              <td>{item.OptionD}</td>
               <td>{item.Answer}</td>
               <td>{item.Hint}</td>
               <td>{item.ErrorMessage}</td>
@@ -62,10 +62,10 @@ const ErrorTable = ({ fileWithError }) => {
               <td>{item.Row + 2}</td>
               <td>{item.Question}</td>
               <td>{item.Category}</td>
-              <td>{item.A}</td>
-              <td>{item.B}</td>
-              <td>{item.C}</td>
-              <td>{item.D}</td>
+              <td>{item.OptionA}</td>
+              <td>{item.OptionB}</td>
+              <td>{item.OptionC}</td>
+              <td>{item.OptionD}</td>
               <td>{item.Answer}</td>
               <td>{item.Hint}</td>
               <td>{item.ErrorMessage}</td>
@@ -83,10 +83,10 @@ const ErrorTable = ({ fileWithError }) => {
             <th scope="col">Row Number</th>
             <th scope="col">Question</th>
             <th scope="col">Category</th>
-            <th scope="col">A</th>
-            <th scope="col">B</th>
-            <th scope="col">C</th>
-            <th scope="col">D</th>
+            <th scope="col">OptionA</th>
+            <th scope="col">OptionB</th>
+            <th scope="col">OptionC</th>
+            <th scope="col">OptionD</th>
             <th scope="col">Answer</th>
             <th scope="col">Hint</th>
             <th scope="col">Error</th>
@@ -99,10 +99,10 @@ const ErrorTable = ({ fileWithError }) => {
               <td>{item.Row + 2}</td>
               <td>{item.Question}</td>
               <td>{item.Category}</td>
-              <td>{item.A}</td>
-              <td>{item.B}</td>
-              <td>{item.C}</td>
-              <td>{item.D}</td>
+              <td>{item.OptionA}</td>
+              <td>{item.OptionB}</td>
+              <td>{item.OptionC}</td>
+              <td>{item.OptionD}</td>
               <td>{item.Answer}</td>
               <td>{item.Hint}</td>
               <td>{item.ErrorMessage}</td>
