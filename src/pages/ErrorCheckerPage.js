@@ -84,7 +84,7 @@ const ErrorCheckerPage = () => {
     let emptyOptions = []
 
     data.forEach((item, index) => {
-      if((item.OptionA) && (item.OptionB) && (item.OptionC) && (item.OptionD)) {
+      if((item.Question) && (item.Category) && (item.OptionA) && (item.OptionB) && (item.OptionC) && (item.OptionD) && (item.Hint) && (item.Answer)) {
         
       } else {
         emptyOptions.push({...item, ErrorMessage: "One of the options is empty or is 0. If 0, ignore.", Row: index})
